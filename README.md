@@ -1,16 +1,30 @@
 # Introduction
 
-Javascript library to validate texts
+Text Validation: This could include checks for length, presence of certain characters, format requirements (like email addresses or phone numbers), or any other rules you need.
+
+Log Analysis: For analyzing logs, you might want to create functions that parse log files and extract relevant data.
+
+ Search and Replace: Implement functions that perform search and replace operations on strings..
+
+URL Parsing: Create functions that parse URLs into their component parts. Regular expressions can help with this by matching different parts of the URL (protocol, domain, path, query parameters, etc.) and extracting them into separate variables or objects.
 
 # Installation
 
-```npm i text-regex-validation```
+```npm install npm i text-regex-validation```
 
 ## How It work
 Call below function and pass your String and regexType (From below TABLE regexType must be same as name in the table accordin to requirment) it will return true or false(Boolean).
+``` import {validateString,analyzeLog, searchAndReplace,parseUrl} from 'text-regex-validation' ```
 
 ```  validateString(inputString, regexType) ```
 
+``` analyzeLog(YorLogText) ```
+ Log Example :- // let logTexts = '[2024-03-03 10:15:30] ERROR: Failed to connect to database'\
+ 
+ ``` searchAndReplace(fullText, SearchText, replaceText) ```
+ 
+``` parseUrl(YourURL) ```
+ 
 | Name | Description 
 | ------ | ------ |
 | email | This is for validation of E-mail pattern like {abc121@xyz.com} |
@@ -31,27 +45,22 @@ Call below function and pass your String and regexType (From below TABLE regexTy
 | userName | This is for validation of userName |
 
 
-And Call it as function with parameter
-
-```validateString(text, regextType)```
-
-
 # Example
-
 ```validateString("example@example.com", 'email')```
+```analyzeLog('[2024-03-03 10:17:20] ERROR: Invalid username or password')```
+```searchAndReplace('This is sample data', 'is', 'not')```
+```parseUrl('https://www.example.com:8080/path/to/page?param1=value1&param2=value2#section1')```
 
 # Usage
-
 `node`
 
 ```js
-       return regexPatterns[regexType].test(inputString);
+return regexPatterns[regexType].test(inputString);
 ```
 
 # Build
-
 ```npm run build```
 
 # Contribute
 
-If you would like to contribute your most welcome. clone the repository.
+If you would like to contribute your most welcome. Clone the repository.
