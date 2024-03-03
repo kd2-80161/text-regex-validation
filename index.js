@@ -21,3 +21,42 @@ export function validateString(inputString, regexType) {
     }
     return regexPatterns[regexType].test(inputString);
 }
+
+export function analyzeLog(logText) {
+    const timestampRegex = /\[(.*?)\]/g;
+    const errorRegex = /ERROR: (.*?)(?=\n|$)/g;
+    const ipRegex = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/g;
+    const timestamps = Array.from(logText.matchAll(timestampRegex), match => match[1]);
+    const errors = Array.from(logText.matchAll(errorRegex), match => match[1]);
+    const ips = Array.from(logText.matchAll(ipRegex), match => match[0]);
+    const logResults = timestamps.map((timestamp, index) => ({
+        timestamp,
+        error: errors[index] || 'N/A',
+        ip: ips[index] || 'N/A'
+    }));
+    return logResults
+};
+
+export function searchAndReplace(text, searchTerm, replaceTerm) {
+    const regex = new RegExp(searchTerm, 'g');
+    const replacedText = text.replace(regex, replaceTerm);
+    return replacedText
+};
+
+export function parseUrl(url) {
+    const urlPattern = /^(?:(\w+):\/\/)?([^\/:]+)(?::(\d+))?([^?#]+)?(?:\?([^#]+))?(?:#(.*))?$/;
+    const matches = url.match(urlPattern);
+    if (matches) {
+        const [, protocol, domain, port, path, queryParams, fragment] = matches;
+        return {
+            protocol: protocol || 'http',
+            domain,
+            port: port || '80',
+            path: path || '/',
+            queryParams: queryParams ? queryParams.split('&') : [],
+            fragment: fragment || ''
+        };
+    } else {
+        return null;
+    }
+};
